@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Payment Terminal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=DM+Sans:wght@600;700;800&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:#1a1a1a; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; user-select:none; }
+  .terminal { background:#222; border-radius:24px; width:92%; max-width:340px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.5); border:2px solid #333; }
+  .screen { background:#0d0d0d; min-height:200px; padding:28px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; border-bottom:3px solid #333; position:relative; }
+  .screen-brand { font-size:11px; color:#444; letter-spacing:3px; text-transform:uppercase; position:absolute; top:14px; left:50%; transform:translateX(-50%); white-space:nowrap; }
+  .screen-amount { font-family:'Share Tech Mono',monospace; font-size:36px; color:#fff; margin-bottom:8px; }
+  .screen-label { font-size:13px; color:#555; margin-bottom:24px; }
+  .pin-display { display:flex; gap:14px; margin-bottom:10px; }
+  .pin-dot { width:18px; height:18px; border-radius:50%; background:#333; border:2px solid #444; transition:all 0.2s; }
+  .pin-dot.filled { background:#22c55e; border-color:#22c55e; }
+  .status-msg { font-size:22px; font-weight:800; margin-top:8px; opacity:0; transition:all 0.4s; }
+  .status-msg.accepted { color:#22c55e; opacity:1; }
+  .status-icon { font-size:52px; margin-bottom:8px; opacity:0; transition:all 0.3s; }
+  .status-icon.show { opacity:1; }
+  .keypad { padding:20px; display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+  .key { background:#2a2a2a; border-radius:14px; height:56px; display:flex; align-items:center; justify-content:center; font-size:22px; font-weight:700; color:#fff; cursor:pointer; border:1px solid #333; transition:transform 0.1s, background 0.1s; }
+  .key:active { transform:scale(0.92); background:#333; }
+  .key.action { font-size:13px; color:#888; }
+  .key.clear { color:#ef4444; }
+</style>
+</head>
+<body>
+<div class="terminal">
+  <div class="screen">
+    <div class="screen-brand">PAYMENT TERMINAL</div>
+    <div class="screen-amount" id="amount">$500.00</div>
+    <div class="screen-label" id="screenLabel">Enter PIN to confirm</div>
+    <div class="pin-display" id="pinDisplay">
+      <div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div>
+      <div class="pin-dot" id="d3"></div>
+      <div class="pin-dot" id="d4"></div>
+    </div>
+    <div class="status-icon" id="statusIcon"></div>
+    <div class="status-msg" id="statusMsg"></div>
+  </div>
+  <div class="keypad">
+    <div class="key" onclick="press('1')">1</div>
+    <div class="key" onclick="press('2')">2</div>
+    <div class="key" onclick="press('3')">3</div>
+    <div class="key" onclick="press('4')">4</div>
+    <div class="key" onclick="press('5')">5</div>
+    <div class="key" onclick="press('6')">6</div>
+    <div class="key" onclick="press('7')">7</div>
+    <div class="key" onclick="press('8')">8</div>
+    <div class="key" onclick="press('9')">9</div>
+    <div class="key action clear" onclick="clearPin()">CLR</div>
+    <div class="key" onclick="press('0')">0</div>
+    <div class="key action" onclick="clearPin()">⌫</div>
+  </div>
+</div>
+<script>
+let pin = '';
+function press(d) {
+  if (pin.length >= 4) return;
+  pin += d;
+  document.getElementById('d'+pin.length).classList.add('filled');
+  if (pin.length === 4) setTimeout(checkPin, 400);
+}
+function checkPin() {
+  const msg = document.getElementById('statusMsg');
+  const icon = document.getElementById('statusIcon');
+  const label = document.getElementById('screenLabel');
+  // Always accepted on this screen
+  icon.textContent = '✓';
+  icon.classList.add('show');
+  msg.textContent = 'PAYMENT ACCEPTED';
+  msg.classList.add('accepted');
+  label.style.display = 'none';
+  document.getElementById('pinDisplay').style.display = 'none';
+}
+function clearPin() {
+  pin = '';
+  ['d1','d2','d3','d4'].forEach(id => document.getElementById(id).classList.remove('filled'));
+  document.getElementById('statusMsg').className = 'status-msg';
+  document.getElementById('statusMsg').textContent = '';
+  document.getElementById('statusIcon').className = 'status-icon';
+  document.getElementById('statusIcon').textContent = '';
+  document.getElementById('screenLabel').style.display = '';
+  document.getElementById('pinDisplay').style.display = '';
+}
+</script>
+</body>
+</html>

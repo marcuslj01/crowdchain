@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Bank Account</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:#f0f4ff; height:100vh; display:flex; flex-direction:column; overflow:hidden; }
+  .status { background:#1e3a5f; padding:14px 20px 8px; display:flex; justify-content:space-between; font-size:13px; font-weight:600; color:#fff; }
+  .nav { background:#1e3a5f; padding:12px 20px 20px; }
+  .nav-bank { font-size:13px; color:#93c5fd; margin-bottom:4px; }
+  .nav-name { font-size:20px; font-weight:800; color:#fff; }
+  .balance-card { background:linear-gradient(135deg,#1d4ed8,#3b82f6); margin:0 16px 16px; border-radius:20px; padding:24px; color:#fff; }
+  .bal-label { font-size:12px; color:#bfdbfe; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+  .bal-amount { font-size:40px; font-weight:800; margin-bottom:4px; }
+  .bal-sub { font-size:13px; color:#93c5fd; }
+  .section-title { padding:0 16px 10px; font-size:13px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:1px; }
+  .transactions { padding:0 16px; display:flex; flex-direction:column; gap:2px; }
+  .tx { background:#fff; padding:14px 16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid #f3f4f6; }
+  .tx:first-child { border-radius:16px 16px 0 0; }
+  .tx:last-child { border-radius:0 0 16px 16px; border-bottom:none; }
+  .tx-icon { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+  .tx-icon.in { background:#dcfce7; }
+  .tx-icon.out { background:#fee2e2; }
+  .tx-info { flex:1; }
+  .tx-name { font-size:14px; font-weight:600; color:#111; }
+  .tx-date { font-size:12px; color:#9ca3af; }
+  .tx-amount { font-size:15px; font-weight:700; }
+  .tx-amount.in { color:#16a34a; }
+  .tx-amount.out { color:#ef4444; }
+  /* HIGHLIGHT NEW TX */
+  .tx.new { animation:highlight 1.5s ease 0.5s; background:#f0fdf4; }
+  .tx.new .tx-icon { background:#bbf7d0; }
+  @keyframes highlight { 0%,100%{background:#fff} 30%,70%{background:#dcfce7} }
+</style>
+</head>
+<body>
+<div class="status"><span>9:41</span><span>●●● 100%</span></div>
+<div class="nav">
+  <div class="nav-bank">NorBank · Personal Account</div>
+  <div class="nav-name">Heine</div>
+</div>
+<div class="balance-card">
+  <div class="bal-label">Available Balance</div>
+  <div class="bal-amount">$17,243.82</div>
+  <div class="bal-sub">+$16,667.00 received today</div>
+</div>
+<div class="section-title">Recent Transactions</div>
+<div class="transactions">
+  <div class="tx new">
+    <div class="tx-icon in">⛓</div>
+    <div class="tx-info">
+      <div class="tx-name">CrowdChain – Milestone 1 Released</div>
+      <div class="tx-date">Today, 14:32 · Smart contract payout</div>
+    </div>
+    <div class="tx-amount in">+$16,667</div>
+  </div>
+  <div class="tx">
+    <div class="tx-icon out">🏠</div>
+    <div class="tx-info">
+      <div class="tx-name">Rent – March</div>
+      <div class="tx-date">Mar 01 · AutoPay</div>
+    </div>
+    <div class="tx-amount out">-$1,200</div>
+  </div>
+  <div class="tx">
+    <div class="tx-icon in">💼</div>
+    <div class="tx-info">
+      <div class="tx-name">Salary</div>
+      <div class="tx-date">Feb 28 · Employer</div>
+    </div>
+    <div class="tx-amount in">+$3,400</div>
+  </div>
+  <div class="tx">
+    <div class="tx-icon out">☕</div>
+    <div class="tx-info">
+      <div class="tx-name">Kaffebrenneriet</div>
+      <div class="tx-date">Feb 27 · Purchase</div>
+    </div>
+    <div class="tx-amount out">-$6.50</div>
+  </div>
+  <div class="tx">
+    <div class="tx-icon out">🛒</div>
+    <div class="tx-info">
+      <div class="tx-name">REMA 1000</div>
+      <div class="tx-date">Feb 26 · Purchase</div>
+    </div>
+    <div class="tx-amount out">-$87.40</div>
+  </div>
+</div>
+</body>
+</html>

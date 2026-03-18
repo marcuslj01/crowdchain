@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Milestone Approved</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'DM Sans',sans-serif; background:#f0fdf4; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; padding:24px; }
+  .card { background:#fff; border:2px solid #bbf7d0; border-radius:28px; padding:48px 28px; width:100%; max-width:360px; text-align:center; box-shadow:0 8px 40px #22c55e15; animation:popIn 0.6s cubic-bezier(0.34,1.2,0.64,1) forwards; }
+  .icon { width:100px; height:100px; background:#dcfce7; border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; font-size:48px; color:#16a34a; animation:pulseG 2s ease-in-out 0.8s infinite; }
+  .title { font-size:30px; font-weight:800; color:#16a34a; margin-bottom:10px; line-height:1.1; }
+  .subtitle { font-size:16px; color:#6b7280; line-height:1.6; margin-bottom:32px; }
+  .subtitle strong { color:#111; }
+  .vote-result { background:#f0fdf4; border:1px solid #bbf7d0; border-radius:16px; padding:18px; margin-bottom:20px; }
+  .vr-label { font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px; }
+  .bar-row { display:flex; align-items:center; gap:10px; margin-bottom:4px; }
+  .bar { flex:1; height:12px; background:#e5e7eb; border-radius:99px; overflow:hidden; }
+  .bar-fill { height:100%; background:linear-gradient(90deg,#16a34a,#22c55e); border-radius:99px; width:0; animation:fillBar 1.2s ease 0.6s forwards; }
+  .bar-pct { font-size:15px; font-weight:700; color:#16a34a; width:40px; text-align:right; }
+  .amount-box { background:#fff; border:2px solid #22c55e; border-radius:20px; padding:24px; margin-bottom:20px; }
+  .am-label { font-size:12px; color:#6b7280; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
+  .am-val { font-size:42px; font-weight:800; color:#16a34a; }
+  .am-sub { font-size:13px; color:#9ca3af; margin-top:4px; }
+  .next-pill { display:inline-block; background:#eef2ff; color:#4f46e5; font-size:13px; font-weight:600; padding:10px 20px; border-radius:99px; border:1px solid #c7d2fe; }
+  @keyframes popIn { from{opacity:0;transform:scale(0.85)} to{opacity:1;transform:scale(1)} }
+  @keyframes pulseG { 0%,100%{box-shadow:0 0 0 0 #22c55e40}50%{box-shadow:0 0 0 18px #22c55e00} }
+  @keyframes fillBar { to{width:84%} }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="icon">✓</div>
+    <div class="title">Milestone Approved!</div>
+    <div class="subtitle"><strong>First tranche unlocked</strong> and funds are released to the founder.</div>
+    <div class="vote-result">
+      <div class="vr-label">Final vote result</div>
+      <div class="bar-row">
+        <span style="font-size:13px;color:#6b7280;width:36px">YES</span>
+        <div class="bar"><div class="bar-fill"></div></div>
+        <span class="bar-pct">84%</span>
+      </div>
+    </div>
+    <div class="amount-box">
+      <div class="am-label">Released to Founder</div>
+      <div class="am-val">$16,667</div>
+      <div class="am-sub">Tranche 1 of 3 · Sent automatically by smart contract</div>
+    </div>
+    <div class="next-pill">→ Milestone 2 now active</div>
+  </div>
+</body>
+</html>
