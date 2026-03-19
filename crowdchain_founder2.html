@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrowdChain – Founder Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #4F6EF7;
+    --blue-light: #7B93FA;
+    --blue-dark: #2A3FAB;
+    --bg: #F4F6FF;
+    --white: #ffffff;
+    --text: #1a1d2e;
+    --muted: #6b7280;
+    --success: #22c55e;
+    --border: #e0e4f7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* Top nav */
+  .nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--blue);
+    letter-spacing: -0.5px;
+  }
+  .nav-logo span { color: var(--text); }
+  .nav-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .avatar {
+    width: 28px; height: 28px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 11px; font-weight: 600;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  /* Success banner */
+  .success-banner {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+    border-radius: 16px;
+    padding: 28px 32px;
+    color: white;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .success-banner::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+  .success-banner::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: 60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .success-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .dot { width: 7px; height: 7px; background: var(--success); border-radius: 50%; }
+  .success-banner h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .success-banner p {
+    font-size: 14px;
+    opacity: 0.8;
+    line-height: 1.5;
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .stat-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .stat-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .stat-value.blue { color: var(--blue); }
+
+  /* Section */
+  .section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .lock-icon { font-size: 13px; }
+
+  /* Milestones */
+  .milestone {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .milestone:last-child { border-bottom: none; }
+  .milestone-num {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .milestone-num.locked {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: white;
+  }
+  .milestone-info { flex: 1; }
+  .milestone-name {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+  .milestone-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .milestone-amount {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .badge {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 100px;
+  }
+  .badge-locked { background: #EEF1FF; color: var(--blue); }
+  .badge-pending { background: #FEF9C3; color: #854d0e; }
+
+  /* Info box */
+  .info-box {
+    background: #EEF1FF;
+    border: 1px solid #C7D0FC;
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--blue-dark);
+    line-height: 1.5;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .info-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+  /* CTA */
+  .cta-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 16px;
+    letter-spacing: 0.02em;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">Crowd<span>Chain</span></div>
+  <div class="nav-user">
+    <div class="avatar">JD</div>
+    John Doe
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="success-banner">
+    <div class="success-tag"><div class="dot"></div> Project Live</div>
+    <h1>🎉 Project Created!</h1>
+    <p>Your campaign is now live on CrowdChain. Funds are secured in the smart contract and will be released as you hit your milestones.</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Raised</div>
+      <div class="stat-value blue">$39,000</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Funded</div>
+      <div class="stat-value">78%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Investors</div>
+      <div class="stat-value">312</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <div class="section-title"><span class="lock-icon">🔒</span> Milestone-Gated Funds</div>
+      <span class="badge badge-locked">Locked</span>
+    </div>
+    <div class="milestone">
+      <div class="milestone-num locked">1</div>
+      <div class="milestone-info">
+        <div class="milestone-name">Working prototype</div>
+        <div class="milestone-sub">Submit documentation to unlock</div>
+      </div>
+      <div class="milestone-amount">🔒 $16,667</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-num">2</div>
+      <div class="milestone-info">
+        <div class="milestone-name">Beta launch</div>
+        <div class="milestone-sub">Awaiting milestone 1</div>
+      </div>
+      <div class="milestone-amount">🔒 $16,667</div>
+    </div>
+    <div class="milestone">
+      <div class="milestone-num">3</div>
+      <div class="milestone-info">
+        <div class="milestone-name">100 paying customers</div>
+        <div class="milestone-sub">Awaiting milestone 2</div>
+      </div>
+      <div class="milestone-amount">🔒 $16,666</div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <span class="info-icon">ℹ️</span>
+    <span>Funds are locked in a smart contract. To access your first tranche, submit proof of completion for milestone 1. An independent verifier will review your submission before it goes to investor vote.</span>
+  </div>
+
+  <button class="cta-btn">Submit Milestone Documentation →</button>
+
+</div>
+</body>
+</html>
