@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kickstarter</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #f0fdf4;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  nav {
+    background: white;
+    border-bottom: 1px solid #d1fae5;
+    padding: 0 28px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: #16a34a;
+  }
+
+  .page {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #upload-screen {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .upload-icon {
+    width: 72px; height: 72px;
+    background: #dcfce7;
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+  }
+  .upload-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #1a1d2e;
+  }
+  .upload-sub {
+    font-size: 14px;
+    color: #6b7280;
+    max-width: 300px;
+    line-height: 1.5;
+  }
+  .upload-btn {
+    padding: 14px 40px;
+    background: #16a34a;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .upload-btn:hover { background: #15803d; transform: translateY(-1px); }
+
+  #success-screen {
+    display: none;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: fadeIn 0.5s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .success-circle {
+    width: 96px; height: 96px;
+    background: linear-gradient(135deg, #16a34a, #14532d);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 42px;
+    box-shadow: 0 12px 40px rgba(22,163,74,0.35);
+  }
+  .success-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: #1a1d2e;
+  }
+  .success-sub {
+    font-size: 15px;
+    color: #6b7280;
+    max-width: 320px;
+    line-height: 1.6;
+  }
+  .success-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #dcfce7;
+    border: 1px solid #bbf7d0;
+    color: #16a34a;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .dot { width: 7px; height: 7px; background: #22c55e; border-radius: 50%; }
+</style>
+</head>
+<body>
+<nav><div class="logo">Kickstarter</div></nav>
+<div class="page">
+  <div id="upload-screen">
+    <div class="upload-icon">📁</div>
+    <div class="upload-title">Create your project</div>
+    <div class="upload-sub">Upload your project details to launch your campaign on Kickstarter.</div>
+    <button class="upload-btn" onclick="showSuccess()">Upload Project →</button>
+  </div>
+  <div id="success-screen">
+    <div class="success-circle">🎉</div>
+    <div class="success-tag"><div class="dot"></div> Live on Kickstarter</div>
+    <div class="success-title">Project Created!</div>
+    <div class="success-sub">Your campaign is live and ready to receive backers. Good luck!</div>
+  </div>
+</div>
+<script>
+  function showSuccess() {
+    document.getElementById('upload-screen').style.display = 'none';
+    const s = document.getElementById('success-screen');
+    s.style.display = 'flex';
+  }
+</script>
+</body>
+</html>
